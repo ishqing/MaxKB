@@ -41,7 +41,7 @@ const initActive = async () => {
     goto: url,
     width: '266',
     height: '266',
-    style: 'width:266px;height:266px'
+    style: 'width:280px;height:280px;border:1px solid #e8e8e8;margin:0 auto;border-radius:8px;'
   })
 
   window.addEventListener('message', async (event: any) => {

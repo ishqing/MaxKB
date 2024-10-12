@@ -38,7 +38,7 @@ interface Config {
 }
 
 const props = defineProps<{ tabs: Tab[] }>()
-const activeKey = ref('dingtalk')
+const activeKey = ref('')
 const allConfigs = ref<PlatformConfig[]>([])
 const config = ref<Config>({ app_key: '', app_secret: '' })
 // const logoUrl = ref('')
@@ -53,6 +53,9 @@ async function getPlatformInfo() {
 }
 
 onMounted(async () => {
+  if (props.tabs.length > 0) {
+    activeKey.value = props.tabs[0].key
+  }
   allConfigs.value = await getPlatformInfo()
   updateConfig(activeKey.value)
 })
@@ -61,12 +64,6 @@ const updateConfig = (key: string) => {
   const selectedConfig = allConfigs.value.find((item) => item.platform === key)
   if (selectedConfig && selectedConfig.config) {
     config.value = selectedConfig.config
-    //   const logoMap: { [key: string]: string } = {
-    //     wecom: 'wechat-work',
-    //     dingtalk: 'dingtalk',
-    //     lark: 'lark'
-    //   }
-    //   logoUrl.value = new URL(`../../../assets/logo_${logoMap[key] || ''}.svg`, import.meta.url).href
   }
 }
 
