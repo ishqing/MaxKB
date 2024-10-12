@@ -86,11 +86,12 @@ const initActive = async () => {
     }
 
     const redirectUri = encodeURIComponent(window.location.origin)
+
     window.DTFrameLogin(
       {
         id: 'ding-talk-qr',
-        width: 250,
-        height: 250
+        width: 280,
+        height: 280
       },
       {
         redirect_uri: redirectUri,

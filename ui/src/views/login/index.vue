@@ -212,7 +212,7 @@ onMounted(() => {
         .getQrType()
         .then((res) => {
           if (res.length > 0) {
-            modeList.value = [...modeList.value, 'QR_CODE']
+            modeList.value = ['QR_CODE', ...modeList.value]
             QrList.value = res
             QrList.value.forEach((item) => {
               orgOptions.value.push({
@@ -264,6 +264,6 @@ onBeforeMount(() => {
   margin: 0 4px;
   width: 32px;
   height: 32px;
-  text-align: center
+  text-align: center;
 }
 </style>

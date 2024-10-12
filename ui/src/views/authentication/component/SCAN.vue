@@ -11,8 +11,8 @@
             </div>
             <div>
               <el-button type="primary" v-if="!item.isValid" @click="showDialog(item)"
-                >接入
-              </el-button>
+                >接入</el-button
+              >
               <span v-if="item.isValid">
                 <span class="mr-4">{{ item.isActive ? '已开启' : '未开启' }}</span>
                 <el-switch
@@ -35,9 +35,13 @@
                       class="vertical-middle lighter break-all ellipsis-1"
                       >{{ value }}</span
                     >
-                    <span v-if="key === 'app_secret' && !showPassword[key]">************</span>
                     <span
-                      v-if="key === 'app_secret' && showPassword[key]"
+                      v-if="key === 'app_secret' && !showPassword[item.key]?.[key]"
+                      class="vertical-middle lighter break-all ellipsis-1"
+                      >************</span
+                    >
+                    <span
+                      v-if="key === 'app_secret' && showPassword[item.key]?.[key]"
                       class="vertical-middle lighter break-all ellipsis-1"
                       >{{ value }}</span
                     >
@@ -48,7 +52,7 @@
                       v-if="key === 'app_secret'"
                       type="primary"
                       text
-                      @click="toggleShowPassword(key)"
+                      @click="toggleShowPassword(item.key)"
                     >
                       <el-icon>
                         <Hide />
@@ -91,7 +95,7 @@ interface Platform {
 const EditModelRef = ref()
 const loading = ref(false)
 const platforms = reactive<Platform[]>(initializePlatforms())
-const showPassword = reactive<{ [key: string]: boolean }>({})
+const showPassword = reactive<{ [platformKey: string]: { [key: string]: boolean } }>({})
 
 onMounted(() => {
   getPlatformInfo()
@@ -164,6 +168,8 @@ function getPlatformInfo() {
             isActive: data.is_active,
             config: data.config
           })
+          showPassword[platform.key] = {}
+          showPassword[platform.key]['app_secret'] = false
         }
       })
     }
@@ -175,6 +181,7 @@ function validateConnection(currentPlatform: Platform) {
     res.data ? MsgSuccess('校验成功') : MsgError('校验失败')
   })
 }
+
 function refresh() {
   getPlatformInfo()
 }
@@ -185,8 +192,11 @@ function changeStatus(currentPlatform: Platform) {
   })
 }
 
-function toggleShowPassword(key: string) {
-  showPassword[key] = !showPassword[key]
+function toggleShowPassword(platformKey: string) {
+  if (!showPassword[platformKey]) {
+    showPassword[platformKey] = {}
+  }
+  showPassword[platformKey]['app_secret'] = !showPassword[platformKey]['app_secret']
 }
 
 function showDialog(platform: Platform) {

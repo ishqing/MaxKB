@@ -20,19 +20,18 @@ const props = defineProps<{
   config: {
     app_secret: string
     app_key: string
-    corpId?: string
-    agentId?: string
+    corp_id?: string
+    agent_id?: string
   }
 }>()
 
 const init = async () => {
   await nextTick() // 确保DOM已更新
   const data = {
-    corpId: props.config.corpId,
-    agentId: props.config.agentId
+    corpId: props.config.corp_id,
+    agentId: props.config.agent_id
   }
   const redirectUri = window.location.origin
-
   try {
     wwLogin.value = ww.createWWLoginPanel({
       el: '#wecom-qr',

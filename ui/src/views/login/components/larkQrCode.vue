@@ -1,7 +1,7 @@
 <template>
   <div class="flex-center mb-16">
     <img src="@/assets/logo_lark.svg " alt="" width="24px" class="mr-4" />
-    <h2>钉钉扫码登录</h2>
+    <h2>飞书扫码登录</h2>
   </div>
   <div id="lark-qr" class="lark-qrName"></div>
 </template>
@@ -39,9 +39,9 @@ const initActive = async () => {
   const QRLoginObj = window.QRLogin({
     id: 'lark-qr',
     goto: url,
-    width: '240',
-    height: '240',
-    style: 'width:240px;height:240px'
+    width: '266',
+    height: '266',
+    style: 'width:266px;height:266px'
   })
 
   window.addEventListener('message', async (event: any) => {
