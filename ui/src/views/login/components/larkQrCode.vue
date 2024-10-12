@@ -52,10 +52,6 @@ onMounted(() => {
   initActive()
 })
 </script>
+<style scoped lang="scss">
 
-<style lang="less" scoped>
-.lark-qrName {
-  width: 300px;
-  height: 300px;
-}
 </style>

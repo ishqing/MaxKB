@@ -1,49 +1,26 @@
 <template>
-  <div class="login-qrcode">
-    <div class="tabs">
-      <button
-        v-for="item in tabs"
-        :key="item.key"
-        @click="selectTab(item.key)"
-        :class="{ active: activeKey === item.key }"
-      >
-        {{ item.value }}
-      </button>
-    </div>
-
-    <div class="qrcode">
-      <div v-if="activeKey === 'dingtalk'" class="login-qrcode">
-        <div class="qrcode">
-          <div class="title">
-            <img :src="logoUrl" alt="" class="icon" />
-            钉钉登录
+  <el-tabs v-model="activeKey" class="demo-tabs" @tab-click="selectTab">
+    <template v-for="item in tabs" :key="item.key">
+      <el-tab-pane :label="item.value" :name="item.key">
+        <div class="text-center mt-16">
+          <div class="flex-center">
+            <img :src="logoUrl" alt="" width="24px" class="mr-4" />
+            <h2>{{ item.value }}扫码登录</h2>
           </div>
-          <ding-talk-qr-code :config="config" />
+          <component
+            :is="defineAsyncComponent(() => import(`./${item.key}QrCode.vue`))"
+            :config="config"
+          />
+          <!-- <ding-talk-qr-code /> -->
         </div>
-      </div>
-      <div v-if="activeKey === 'lark'" class="login-qrcode">
-        <div class="qrcode">
-          <div class="title">
-            <img :src="logoUrl" alt="" class="icon" />
-            飞书登录
-          </div>
-          <lark-qr-code :config="config" />
-        </div>
-      </div>
-      <div v-if="activeKey === 'wecom'" class="login-qrcode">
-        <div class="qrcode">
-          <we-com-qr-code :config="config" />
-        </div>
-      </div>
-    </div>
-  </div>
+      </el-tab-pane>
+    </template>
+  </el-tabs>
 </template>
 
 <script setup lang="ts">
-import { defineProps, onMounted, ref } from 'vue'
-import dingTalkQrCode from './dingTalkQrCode.vue'
-import larkQrCode from './larkQrCode.vue'
-import weComQrCode from './weComQrCode.vue'
+import { defineProps, onMounted, ref, defineAsyncComponent } from 'vue'
+
 import platformApi from '@/api/platform-source'
 
 interface Tab {
@@ -104,47 +81,4 @@ const selectTab = (key: string) => {
 }
 </script>
 
-<style scoped lang="scss">
-.tabs button {
-  padding: 10px 20px;
-  cursor: pointer;
-  border: none;
-  outline: none;
-  background-color: #f1f1f1;
-  margin-right: 5px;
-  &.active {
-    background-color: #ddd;
-  }
-}
-.login-qrcode {
-  display: flex;
-  align-items: center;
-  margin-top: 24px;
-  min-width: 480px;
-  flex-direction: column;
-  .qrcode {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    border-radius: 8px;
-    background: #ffffff;
-    flex-direction: column;
-  }
-  .title {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    font-size: 18px;
-    font-weight: 500;
-    line-height: 26px;
-    margin-bottom: -24px;
-    z-index: 100000;
-    .ed-icon {
-      margin-right: 8px;
-      font-size: 24px;
-    }
-  }
-}
-</style>
+<style scoped lang="scss"></style>

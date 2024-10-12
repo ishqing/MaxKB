@@ -75,7 +75,7 @@
             class="login-button-circle color-secondary"
             @click="changeMode('QR_CODE')"
           >
-            <img src="./img.png" class="qr-code" />
+            <img src="@/assets/icon_qr_outlined.svg" width="25px" />
           </el-button>
           <el-button
             v-if="item === '' && loginMode !== ''"
@@ -260,21 +260,9 @@ onBeforeMount(() => {
 }
 
 .login-button-circle {
-  padding: 25px !important;
-  position: relative; /* 设置相对定位 */
-  background-color: #f0f0f0; /* 背景色 */
-  color: #333; /* 文字颜色 */
-  border-color: #ddd; /* 边框颜色 */
-  width: 50px; /* 按钮宽度 */
-  height: 50px; /* 按钮高度 */
-}
-
-.qr-code {
-  position: absolute; /* 使用绝对定位 */
-  top: 50%; /* 垂直居中 */
-  left: 50%; /* 水平居中 */
-  transform: translate(-50%, -50%); /* 居中对齐 */
-  max-width: 80%; /* 控制图片大小 */
-  max-height: 80%;
+  padding: 20px !important;
+  margin: 0 4px;
+  width: 32px;
+  height: 32px;
 }
 </style>

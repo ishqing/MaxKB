@@ -66,8 +66,4 @@ const init = async () => {
 init()
 </script>
 
-<style lang="less" scoped>
-.wecom-qr {
-  margin-top: -20px; // 调整为合适的值，确保二维码可见
-}
-</style>
+<style scoped lang="scss"></style>

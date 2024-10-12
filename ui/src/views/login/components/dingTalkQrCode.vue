@@ -1,5 +1,11 @@
 <template>
   <div id="ding-talk-qr" class="ding-talk-qrName"></div>
+  <div>
+    <el-text>请使用钉钉扫描二维码登录 </el-text>
+    <el-button type="primary" link>
+      <el-icon><RefreshRight /></el-icon> 刷新</el-button
+    >
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -119,9 +125,4 @@ onMounted(() => {
 })
 </script>
 
-<style lang="less" scoped>
-.ding-talk-qrName {
-  width: 300px;
-  height: 300px;
-}
-</style>
+<style scoped lang="scss"></style>
