@@ -1,17 +1,12 @@
 <template>
-  <el-tabs v-model="activeKey" class="demo-tabs" @tab-click="selectTab">
+  <el-tabs v-model="activeKey" @tab-click="selectTab">
     <template v-for="item in tabs" :key="item.key">
       <el-tab-pane :label="item.value" :name="item.key">
         <div class="text-center mt-16">
-          <div class="flex-center">
-            <img :src="logoUrl" alt="" width="24px" class="mr-4" />
-            <h2>{{ item.value }}扫码登录</h2>
-          </div>
           <component
             :is="defineAsyncComponent(() => import(`./${item.key}QrCode.vue`))"
             :config="config"
           />
-          <!-- <ding-talk-qr-code /> -->
         </div>
       </el-tab-pane>
     </template>
@@ -46,7 +41,7 @@ const props = defineProps<{ tabs: Tab[] }>()
 const activeKey = ref('dingtalk')
 const allConfigs = ref<PlatformConfig[]>([])
 const config = ref<Config>({ app_key: '', app_secret: '' })
-const logoUrl = ref('')
+// const logoUrl = ref('')
 
 async function getPlatformInfo() {
   try {
@@ -66,12 +61,12 @@ const updateConfig = (key: string) => {
   const selectedConfig = allConfigs.value.find((item) => item.platform === key)
   if (selectedConfig && selectedConfig.config) {
     config.value = selectedConfig.config
-    const logoMap: { [key: string]: string } = {
-      wecom: 'wechat-work',
-      dingtalk: 'dingtalk',
-      lark: 'lark'
-    }
-    logoUrl.value = new URL(`../../../assets/logo_${logoMap[key] || ''}.svg`, import.meta.url).href
+    //   const logoMap: { [key: string]: string } = {
+    //     wecom: 'wechat-work',
+    //     dingtalk: 'dingtalk',
+    //     lark: 'lark'
+    //   }
+    //   logoUrl.value = new URL(`../../../assets/logo_${logoMap[key] || ''}.svg`, import.meta.url).href
   }
 }
 

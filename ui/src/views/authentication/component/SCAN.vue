@@ -30,11 +30,17 @@
                 <el-col v-for="(value, key) in item.config" :key="key" :span="12">
                   <el-text type="info">{{ formatFieldName(key) }}</el-text>
                   <div class="mt-4 mb-16 flex align-center">
-                    <span v-if="key !== 'app_secret'" class="vertical-middle lighter break-all">{{
-                      value
-                    }}</span>
+                    <span
+                      v-if="key !== 'app_secret'"
+                      class="vertical-middle lighter break-all ellipsis-1"
+                      >{{ value }}</span
+                    >
                     <span v-if="key === 'app_secret' && !showPassword[key]">************</span>
-                    <span v-if="key === 'app_secret' && showPassword[key]">{{ value }}</span>
+                    <span
+                      v-if="key === 'app_secret' && showPassword[key]"
+                      class="vertical-middle lighter break-all ellipsis-1"
+                      >{{ value }}</span
+                    >
                     <el-button type="primary" text @click="() => copyClick(value)">
                       <AppIcon iconName="app-copy" />
                     </el-button>
@@ -52,7 +58,7 @@
                 </el-col>
               </el-row>
               <el-button type="primary" @click="showDialog(item)">编辑</el-button>
-              <el-button type="primary" @click="validateConnection(item)">校验</el-button>
+              <el-button @click="validateConnection(item)">校验</el-button>
             </div>
           </el-collapse-transition>
         </el-card>

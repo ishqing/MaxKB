@@ -1,10 +1,10 @@
 <template>
-  <div id="ding-talk-qr" class="ding-talk-qrName"></div>
-  <div>
-    <el-text>请使用钉钉扫描二维码登录 </el-text>
-    <el-button type="primary" link>
-      <el-icon><RefreshRight /></el-icon> 刷新</el-button
-    >
+  <div class="flex-center mb-16">
+    <img src="@/assets/logo_dingtalk.svg " alt="" width="24px" class="mr-4" />
+    <h2>钉钉扫码登录</h2>
+  </div>
+  <div class="ding-talk-qrName">
+    <div id="ding-talk-qr"></div>
   </div>
 </template>
 
@@ -12,7 +12,6 @@
 import { useRouter } from 'vue-router'
 import { useScriptTag } from '@vueuse/core'
 import { defineProps, onMounted, ref } from 'vue'
-import UserApi from '@/api/user'
 import useStore from '@/stores'
 
 // 声明 DTFrameLogin 和 QRLogin 的类型
@@ -90,8 +89,8 @@ const initActive = async () => {
     window.DTFrameLogin(
       {
         id: 'ding-talk-qr',
-        width: 300,
-        height: 300
+        width: 250,
+        height: 250
       },
       {
         redirect_uri: redirectUri,
@@ -125,4 +124,12 @@ onMounted(() => {
 })
 </script>
 
-<style scoped lang="scss"></style>
+<style lang="scss">
+.ding-talk-qrName {
+  border: 1px solid #e8e8e8;
+  border-radius: 8px;
+  height: 280px;
+  width: 280px;
+  margin: 0 auto;
+}
+</style>

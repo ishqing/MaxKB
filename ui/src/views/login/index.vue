@@ -264,5 +264,6 @@ onBeforeMount(() => {
   margin: 0 4px;
   width: 32px;
   height: 32px;
+  text-align: center
 }
 </style>
